@@ -1,10 +1,7 @@
 import networkx as nx
 import numpy as np
 from math import log
-from sklearn import metrics
-from sklearn.cluster import KMeans
 import motifcluster.motifadjacency as motif
-import main_tool_new
 import time
 
 maxd = 256

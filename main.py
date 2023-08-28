@@ -1,3 +1,6 @@
+from sklearn import metrics
+from sklearn.cluster import KMeans
+
 from matrix import *
 import copy
 
