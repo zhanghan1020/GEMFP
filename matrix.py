@@ -5,37 +5,6 @@ import motifcluster.motifadjacency as motif
 import time
 
 maxd = 256
-# 计算NMI
-def mutual_info(c_A, c_B,S):
-    N_mA = len(c_A)
-    N_mB = len(c_B)
-    # print  "CA",c_A
-    # print  "CB",c_B
-
-    I_num = 0
-    for i in range(len(c_A)):
-        for j in range(len(c_B)):
-            n_i = len(c_A[i])
-            n_j = len(c_B[j])
-            n_ij = len(set(c_A[i]) & set(c_B[j]))
-            if n_ij == 0:
-                continue
-            log_term = log((n_ij * S * 1.0) / (n_i * n_j))
-
-            I_num += n_ij * log_term
-    I_num *= -2
-
-    I_den = 0
-    for i in range(len(c_A)):
-        n_i = len(c_A[i])
-        I_den += n_i * log(n_i * 1.0 / S)
-
-    for j in range(len(c_B)):
-        n_j = len(c_B[j])
-        I_den += n_j * log(n_j * 1.0 / S)
-
-    I = I_num / I_den
-    return I
 
 def get_G(filename):
     G_node = set()
@@ -75,8 +44,6 @@ def get_G(filename):
 def get_adjMatrix(filename):
     G = get_G(filename)
     print("构建图网络完毕")
-    # G = get_PubmedG(filename)
-    # G = get_G_gml(filename)
     matrix = nx.adjacency_matrix(G)
     print("构建邻接矩阵完毕")
     return G,matrix
@@ -168,7 +135,6 @@ def get_acceptance(newMatrix,u,v):
     if (log(1 + ku) + log(1 + kv) == 0) :
         return 1
     return log(1 + kv) / (log(1 + ku) + log(1 + kv))
-    # return newMatrix[u][v] / ku
 
 def normalizaion_Matrix(matrix):
     newMatrix = np.zeros_like(matrix,dtype=float)

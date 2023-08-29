@@ -13,7 +13,6 @@ def cal_Q(G,k):  # 计算Q
         result[index].append(G.nodes[node]['embed'])
         index = index + 1
     result = np.array(result).reshape(len(G.nodes), maxd)
-    # print(G.nodes[0]['embed'])
 
     model = KMeans(n_clusters=k)  # 分为k类
     model.fit(result)
